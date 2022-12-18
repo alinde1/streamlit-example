@@ -4,21 +4,12 @@ import time
 st.set_page_config(layout="wide")
 st.title('Logging in Text Box')
 
-# creating a placeholder for the fixed sized textbox
+def update_text():
+    logtxt = text_input
+    logtxtbox.text_area("Respuesta: ",logtxt, height = 500)
+
+text_input = st.text_input("Pregunta", value="", on_change=update_text)
+
 logtxtbox = st.empty()
-logtxt = 'start'
-logtxtbox.text_area("Logging: ",logtxt, height = 500)
-
-end_of_loop = False
-counter = 1
-
-while (end_of_loop==False):
-
-    logtxt += 'Counter [' + str(counter) + '] \n'
-    logtxtbox.text_area("Logging: ", logtxt, height=500)
-
-    counter += 1
-    if (counter > 100):
-        end_of_loop = True
-
-    time.sleep(0.2)
+logtxt = ""
+logtxtbox.text_area("Respuesta: ",logtxt, height = 500)
