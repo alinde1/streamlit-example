@@ -2,7 +2,7 @@ import streamlit as st
 import time
 
 st.set_page_config(layout="wide")
-st.title('Logging in Text Box')
+st.title('Chatbot para refugiados')
 
 def update_text():
     logtxt = text_input
