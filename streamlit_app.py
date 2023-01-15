@@ -1,15 +1,5 @@
 import streamlit as st
-import time
+from streamlit_chat import message
 
-st.set_page_config(layout="wide")
-st.title('Chatbot para refugiados')
-
-def update_text():
-    logtxt = text_input
-    logtxtbox.text_area("Respuesta: ",logtxt, height = 500)
-
-text_input = st.text_input("Pregunta", value="", on_change=update_text)
-
-logtxtbox = st.empty()
-logtxt = ""
-logtxtbox.text_area("Respuesta: ",logtxt, height = 500)
+message("My message")
+message("Hello bot!", is_user=True)  # align's the message to the right
