@@ -13,7 +13,6 @@ API_URL = "https://api-inference.huggingface.co/models/facebook/blenderbot-400M-
 headers = {"Bearer API_TOKEN": st.secrets['api_key']}
 
 st.header("Chatbot para refugiados")
-st.markdown("[Github](https://github.com/ai-yash/st-chat)")
 
 if 'generated' not in st.session_state:
     st.session_state['generated'] = []
