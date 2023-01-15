@@ -10,7 +10,7 @@ st.set_page_config(
 )
 
 API_URL = "https://api-inference.huggingface.co/models/facebook/blenderbot-400M-distill"
-headers = {"Authorization": st.secrets['api_key']}
+headers = {"Bearer API_TOKEN": st.secrets['api_key']}
 
 st.header("Chatbot para refugiados")
 st.markdown("[Github](https://github.com/ai-yash/st-chat)")
@@ -23,6 +23,7 @@ if 'past' not in st.session_state:
 
 
 def query(payload):
+    st.write(payload)
     response = requests.post(API_URL, headers=headers, json=payload)
     return response.json()
 
@@ -35,16 +36,21 @@ def get_text():
 user_input = get_text()
 
 if user_input:
-    output = query({
-        "inputs": {
-            "past_user_inputs": st.session_state.past,
-            "generated_responses": st.session_state.generated,
-            "text": user_input,
-        },"parameters": {"repetition_penalty": 1.33},
-    })
+    # output = query({
+    #     "inputs": {
+    #         "past_user_inputs": st.session_state.past,
+    #         "generated_responses": st.session_state.generated,
+    #         "text": user_input,
+    #     },"parameters": {"repetition_penalty": 1.33},
+    # })
+    output = "Probando..."
+
+    # st.write(user_input)
+    # st.write(output)
+    # st.write(st.session_state)
 
     st.session_state.past.append(user_input)
-    st.session_state.generated.append(output["generated_text"])
+    st.session_state.generated.append(output) #["generated_text"]
 
 if st.session_state['generated']:
 
