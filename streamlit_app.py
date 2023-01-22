@@ -24,10 +24,13 @@ if 'past' not in st.session_state:
 
 
 def load_model():
-    model_path = 'https://github.com/josuemzx/Chatbot-para-refugiados/blob/main/models/model.pkl?raw=true'
+    model_path = 'https://bitbucket.org/ml-learning/models/raw/9a5be506273ef6999ae4244653548c177cc748a0/models/model.pkl'
     r = requests.get(model_path, stream='True')
-    model = pickle.load(r.raw)
-    return model
+    if r.status_code == 200:
+        model = pickle.load(r.raw)
+        return model
+    else:
+        return None
 
 
 # def prediction(context, question, limit=5):
@@ -83,7 +86,7 @@ if user_input:
     #         "text": user_input,
     #     },"parameters": {"repetition_penalty": 1.33},
     # })
-    output = "Respuesta.." # prediction(contexto_1, user_input)[-1]
+    output = "Working..." # prediction(contexto_1, user_input)[-1]
 
     # st.write(user_input)
     # st.write(output)
