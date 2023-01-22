@@ -3,7 +3,7 @@
 import streamlit as st
 from streamlit_chat import message
 import requests
-import simpletransformers
+#import simpletransformers
 import pickle
 
 st.set_page_config(
@@ -30,21 +30,21 @@ def load_model():
     return model
 
 
-def prediction(context, question, limit=5):
-  to_predict = [
-      {
-          "context": context,
-          "qas": [
-              {
-                  "question": question,
-                  "id": "0",
-              }
-          ],
-      }
-  ]
-  answers, probabilities = model.predict(to_predict)
-  answers = answers[0]["answer"][:limit]
-  return answers
+# def prediction(context, question, limit=5):
+#   to_predict = [
+#       {
+#           "context": context,
+#           "qas": [
+#               {
+#                   "question": question,
+#                   "id": "0",
+#               }
+#           ],
+#       }
+#   ]
+#   answers, probabilities = model.predict(to_predict)
+#   answers = answers[0]["answer"][:limit]
+#   return answers
 
 
 def query(payload):
@@ -58,7 +58,7 @@ def get_text():
     return input_text
 
 
-model = load_model()
+#model = load_model()
 contexto_1 = """
 Derecho a solicitar protección internacional.\n\n1. Las personas nacionales no comunitarias
 y las apátridas presentes en territorio español tienen derecho a solicitar protección internacional en España.\n\n2.
@@ -83,7 +83,7 @@ if user_input:
     #         "text": user_input,
     #     },"parameters": {"repetition_penalty": 1.33},
     # })
-    output = prediction(contexto_1, user_input)[-1]
+    output = "Respuesta.." # prediction(contexto_1, user_input)[-1]
 
     # st.write(user_input)
     # st.write(output)
