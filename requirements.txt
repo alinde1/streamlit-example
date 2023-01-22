@@ -3,4 +3,3 @@ pandas
 streamlit
 streamlit_chat
 requests
-pickle
