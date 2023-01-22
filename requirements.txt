@@ -4,3 +4,4 @@ streamlit
 streamlit_chat
 requests
 simpletransformers
+pickle
