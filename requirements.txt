@@ -3,5 +3,3 @@ pandas
 streamlit
 streamlit_chat
 requests
-torch
-simpletransformers
