@@ -3,6 +3,3 @@ pandas
 streamlit
 streamlit_chat
 requests
-simpletransformers
--i https://download.pytorch.org/whl/cpu
-torch
