@@ -60,7 +60,7 @@ def get_text():
     return input_text
 
 
-model = load_model()
+#model = load_model()
 contexto_1 = """
 Derecho a solicitar protección internacional.\n\n1. Las personas nacionales no comunitarias
 y las apátridas presentes en territorio español tienen derecho a solicitar protección internacional en España.\n\n2.
