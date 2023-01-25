@@ -3,7 +3,6 @@
 import streamlit as st
 from streamlit_chat import message
 import requests
-import transformers
 import pickle
 
 st.set_page_config(
