@@ -14,6 +14,7 @@ API_URL = "https://api-inference.huggingface.co/models/facebook/blenderbot-400M-
 headers = {"Bearer API_TOKEN": st.secrets['api_key']}
 
 st.header("Chatbot para refugiados")
+st.caption("Este es un bot de prueba y los textos son generados. ¡No consideres esta información como fiable! Es preferible que consultes con tu especialista o asesor legal.")
 
 if 'generated' not in st.session_state:
     st.session_state['generated'] = []
