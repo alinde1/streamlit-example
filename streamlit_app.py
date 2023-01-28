@@ -56,7 +56,7 @@ def query(payload):
 
 
 def get_text():
-    input_text = st.text_input("You: ","Hello, how are you?", key="input")
+    input_text = st.text_input("Tú: ","Hola, ¿cómo estás?", key="input")
     return input_text
 
 
@@ -85,7 +85,7 @@ if user_input:
     #         "text": user_input,
     #     },"parameters": {"repetition_penalty": 1.33},
     # })
-    output = "Working..." # prediction(contexto_1, user_input)[-1]
+    output = "Lo siento. No tengo cargado ningún modelo para poder contestarte" # prediction(contexto_1, user_input)[-1]
 
     # st.write(user_input)
     # st.write(output)
