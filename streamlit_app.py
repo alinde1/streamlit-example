@@ -4,6 +4,7 @@ import streamlit as st
 from streamlit_chat import message
 import requests
 import pickle
+import hfapi
 
 st.set_page_config(
     page_title="Chatbot para refugiados",
