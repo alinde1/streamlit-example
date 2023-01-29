@@ -15,6 +15,7 @@ st.set_page_config(
 API_URL = "https://api-inference.huggingface.co/models/facebook/blenderbot-400M-distill"
 headers = {"Bearer API_TOKEN": st.secrets['api_key']}
 
+min_score = 10
 client = hfapi.Client(api_token=st.secrets['api_key'])
 model = "mrm8488/distill-bert-base-spanish-wwm-cased-finetuned-spa-squad2-es"
 
@@ -56,22 +57,36 @@ def get_text():
     return input_text
 
 
-context = ""
-for _, _, files in os.walk("context"):
-    for file in files:
-        with open("context/" + file) as f:
-            data = f.read()
-            context = "\n".join([context, data])
-
 user_input = get_text()
 
 if user_input:
-    response = client.question_answering(user_input, context, model=model)
-    output = response['answer'] # "Lo siento. No tengo cargado ningún modelo para poder contestarte"
+
+    max_score = 0
+    max_answer = ""
+    responses = []
+    for _, _, files in os.walk("context"):
+        for file in files:
+            with open("context/" + file) as f:
+                context = f.read()
+                response = client.question_answering(user_input, context, model=model)
+                if response['error']:
+                    st.write(response['error'])
+                else:
+                    responses.append((response['answer'], response['score']))
+                    if response['score'] > max_score:
+                        max_score = response['score']
+                        max_answer = response['answer']
+
+    if max_score >= min_score:
+        output = max_answer
+    else:
+        output = "Lo siento. No se la respuesta"
 
     # st.write(user_input)
     # st.write(output)
     # st.write(st.session_state)
+
+    st.write(responses)
 
     st.session_state.past.append(user_input)
     st.session_state.generated.append(output) #["generated_text"]
