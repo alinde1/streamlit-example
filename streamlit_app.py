@@ -12,38 +12,20 @@ st.set_page_config(
     page_icon=":robot:"
 )
 
-API_URL = "https://api-inference.huggingface.co/models/facebook/blenderbot-400M-distill"
-headers = {"Bearer API_TOKEN": st.secrets['api_key']}
-
 min_score = 10
 client = hfapi.Client(api_token=st.secrets['api_key'])
 model = "mrm8488/distill-bert-base-spanish-wwm-cased-finetuned-spa-squad2-es"
 
 st.header("Chatbot para refugiados")
-st.caption("Este es un bot de prueba y los textos son generados. ¡No consideres esta información como fiable! Es preferible que consultes con tu especialista o asesor legal.")
+st.caption(("Este es un bot de prueba y los textos son generados. ",
+            "¡No consideres esta información como fiable! ",
+            "Es preferible que consultes con tu especialista o asesor legal."))
 
 if 'generated' not in st.session_state:
     st.session_state['generated'] = []
 
 if 'past' not in st.session_state:
     st.session_state['past'] = []
-
-
-# def prediction(context, question, limit=5):
-#   to_predict = [
-#       {
-#           "context": context,
-#           "qas": [
-#               {
-#                   "question": question,
-#                   "id": "0",
-#               }
-#           ],
-#       }
-#   ]
-#   answers, probabilities = model.predict(to_predict)
-#   answers = answers[0]["answer"][:limit]
-#   return answers
 
 
 def query(payload):
