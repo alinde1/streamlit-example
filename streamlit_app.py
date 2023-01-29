@@ -5,6 +5,7 @@ from streamlit_chat import message
 import requests
 import pickle
 import hfapi
+import os
 
 st.set_page_config(
     page_title="Chatbot para refugiados",
@@ -54,8 +55,13 @@ def get_text():
     input_text = st.text_input("Tú: ","Hola, ¿cómo estás?", key="input")
     return input_text
 
-context_url = "https://raw.githubusercontent.com/josuemzx/Chatbot-para-refugiados/main/data/Dataset%20propio/ChatbotRefugiados_BOE_data.csv"
-context = requests.get(context_url).text
+
+context = ""
+for _, _, files in os.walk("context"):
+    for file in files:
+        with open("context/" + file) as f:
+            data = f.read()
+            context = "\n".join([context, data])
 
 user_input = get_text()
 
