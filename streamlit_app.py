@@ -14,6 +14,9 @@ st.set_page_config(
 API_URL = "https://api-inference.huggingface.co/models/facebook/blenderbot-400M-distill"
 headers = {"Bearer API_TOKEN": st.secrets['api_key']}
 
+client = hfapi.Client(api_token=st.secrets['api_key'])
+model = "mrm8488/distill-bert-base-spanish-wwm-cased-finetuned-spa-squad2-es"
+
 st.header("Chatbot para refugiados")
 st.caption("Este es un bot de prueba y los textos son generados. ¡No consideres esta información como fiable! Es preferible que consultes con tu especialista o asesor legal.")
 
@@ -22,16 +25,6 @@ if 'generated' not in st.session_state:
 
 if 'past' not in st.session_state:
     st.session_state['past'] = []
-
-
-def load_model():
-    model_path = 'https://bitbucket.org/ml-learning/models/raw/9a5be506273ef6999ae4244653548c177cc748a0/models/model.pkl'
-    r = requests.get(model_path, stream='True')
-    if r.status_code == 200:
-        model = pickle.load(r.raw)
-        return model
-    else:
-        return None
 
 
 # def prediction(context, question, limit=5):
@@ -62,8 +55,7 @@ def get_text():
     return input_text
 
 
-#model = load_model()
-contexto_1 = """
+context = """
 Derecho a solicitar protección internacional.\n\n1. Las personas nacionales no comunitarias
 y las apátridas presentes en territorio español tienen derecho a solicitar protección internacional en España.\n\n2.
 Para su ejercicio, los solicitantes de protección internacional tendrán derecho a asistencia sanitaria y a asistencia
@@ -80,14 +72,8 @@ incluido el hecho de la presentación de la solicitud, tendrá carácter confide
 user_input = get_text()
 
 if user_input:
-    # output = query({
-    #     "inputs": {
-    #         "past_user_inputs": st.session_state.past,
-    #         "generated_responses": st.session_state.generated,
-    #         "text": user_input,
-    #     },"parameters": {"repetition_penalty": 1.33},
-    # })
-    output = "Lo siento. No tengo cargado ningún modelo para poder contestarte" # prediction(contexto_1, user_input)[-1]
+    response = client.question_answering(user_input, context, model=model)
+    output = response['answer'] # "Lo siento. No tengo cargado ningún modelo para poder contestarte"
 
     # st.write(user_input)
     # st.write(output)
