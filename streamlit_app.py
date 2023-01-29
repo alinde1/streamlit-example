@@ -28,12 +28,6 @@ if 'past' not in st.session_state:
     st.session_state['past'] = []
 
 
-def query(payload):
-    st.write(payload)
-    response = requests.post(API_URL, headers=headers, json=payload)
-    return response.json()
-
-
 def get_text():
     input_text = st.text_input("Tú: ","Hola, ¿cómo estás?", key="input")
     return input_text
