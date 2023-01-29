@@ -54,20 +54,8 @@ def get_text():
     input_text = st.text_input("Tú: ","Hola, ¿cómo estás?", key="input")
     return input_text
 
-
-context = """
-Derecho a solicitar protección internacional.\n\n1. Las personas nacionales no comunitarias
-y las apátridas presentes en territorio español tienen derecho a solicitar protección internacional en España.\n\n2.
-Para su ejercicio, los solicitantes de protección internacional tendrán derecho a asistencia sanitaria y a asistencia
-jurídica gratuita, que se extenderá a la formalización de la solicitud y a toda la tramitación del procedimiento,
-y que se prestará en los términos previstos en la legislación española en esta materia, así como derecho a intérprete
-en los términos del artículo 22 de la Ley Orgánica 4/2000.\n\nLa asistencia jurídica referida en el párrafo anterior
-será preceptiva cuando las solicitudes se formalicen de acuerdo al procedimiento señalado en el artículo 21 de la
-presente Ley.\n\n3. La presentación de la solicitud conllevará la valoración de las circunstancias determinantes
-del reconocimiento de la condición de refugiado, así como de la concesión de la protección subsidiaria.
-De este extremo se informará en debida forma al solicitante.\n\n4. Toda información relativa al procedimiento,
-incluido el hecho de la presentación de la solicitud, tendrá carácter confidencial.
-"""
+context_url = "https://raw.githubusercontent.com/josuemzx/Chatbot-para-refugiados/main/data/Dataset%20propio/ChatbotRefugiados_BOE_data.csv"
+context = requests.get(context_url)
 
 user_input = get_text()
 
