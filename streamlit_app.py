@@ -55,7 +55,7 @@ def get_text():
     return input_text
 
 context_url = "https://raw.githubusercontent.com/josuemzx/Chatbot-para-refugiados/main/data/Dataset%20propio/ChatbotRefugiados_BOE_data.csv"
-context = requests.get(context_url)
+context = requests.get(context_url).text
 
 user_input = get_text()
 
