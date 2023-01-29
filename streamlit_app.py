@@ -12,7 +12,7 @@ st.set_page_config(
     page_icon=":robot:"
 )
 
-min_score = 10
+min_score = 10/100
 client = hfapi.Client(api_token=st.secrets['api_key'])
 model = "mrm8488/distill-bert-base-spanish-wwm-cased-finetuned-spa-squad2-es"
 
@@ -45,7 +45,7 @@ if user_input:
             with open("context/" + file) as f:
                 context = f.read()
                 response = client.question_answering(user_input, context, model=model)
-                if response['error']:
+                if response.get('error'):
                     st.write(response['error'])
                 else:
                     responses.append((response['answer'], response['score']))
@@ -58,14 +58,8 @@ if user_input:
     else:
         output = "Lo siento. No se la respuesta"
 
-    # st.write(user_input)
-    # st.write(output)
-    # st.write(st.session_state)
-
-    st.write(responses)
-
     st.session_state.past.append(user_input)
-    st.session_state.generated.append(output) #["generated_text"]
+    st.session_state.generated.append(output)
 
 if st.session_state['generated']:
 
