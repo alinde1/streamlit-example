@@ -3,7 +3,6 @@
 import streamlit as st
 from streamlit_chat import message
 import requests
-import pickle
 import hfapi
 import os
 
@@ -13,7 +12,12 @@ st.set_page_config(
 )
 
 min_score = 10/100
-client = hfapi.Client(api_token=st.secrets['api_key'])
+api_key = st.secrets.get('api_key')
+if not api_key:
+    print(st.secrets)
+    raise Exception("Cannot load API key")
+
+client = hfapi.Client(api_token=api_key)
 model = "mrm8488/distill-bert-base-spanish-wwm-cased-finetuned-spa-squad2-es"
 
 st.header("Chatbot para refugiados")
