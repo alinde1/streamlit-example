@@ -14,7 +14,7 @@ st.set_page_config(
 min_score = 10/100
 api_key = st.secrets.get('api_key')
 if not api_key:
-    print(st.secrets)
+    st.write("ERROR: Cannot load the API key")
     raise Exception("Cannot load API key")
 
 client = hfapi.Client(api_token=api_key)
